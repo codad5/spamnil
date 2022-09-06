@@ -20,7 +20,7 @@ class Instagram{
     // }
     public function test(String $user){
         $controller = new InstagramController();
-        $data = $controller->isVerified($user);
+        $data = $controller->no_of_followers($user);
         echo '<pre> hello';
         print_r($data);
         echo '</pre>';

@@ -32,4 +32,11 @@ class Instagram{
         // $data = Helper\axios($_ENV['INSTAGRAM_BASEURL']."searchuser/$keyword", 'GET', ['host' => 'INSTAGRAM_BASEURL']);
         return $GLOBALS['client']->get("searchuser/$keyword");
     }
+    public function getUserByusername(String $username){
+        $result = $GLOBALS['client']->get("userinfo/$username");
+        if($result->data->success){
+            return $result;
+        }
+        return false;
+    }
 }
