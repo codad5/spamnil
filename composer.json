@@ -1,0 +1,8 @@
+{
+    "require": {
+        "trulyao/php-router": "^2.0",
+        "trulyao/neat-http": "^1.0",
+        "guzzlehttp/guzzle": "^7.5",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
