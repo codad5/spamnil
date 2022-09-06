@@ -8,6 +8,9 @@ use \Codad5\Spamnil\Controller\Instagram as InstagramController;
 
 
 class Instagram{
+    public function ___construct(){
+        $this->controller = new InstagramController();
+    }
     // private $controller = new InstagramController();
     // public function searchUsers(String $keyword){
     //     return $this->controller->searchUsers($keyword);

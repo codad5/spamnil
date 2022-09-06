@@ -11,11 +11,16 @@ $model = new InstagramModel();
 
 class Instagram{
     // private $model = new InstagramModel();
-    public function searchUsers(String $keyword){
-        return $GLOBALS['model']->searchUsers($keyword);
+    private $user;
+    public function ___construct(String $user){
+        $this->user = $GLOBALS['model']->searchUsers($user);
     }
-    public function isVerified(String $id){
-        $data =  $GLOBALS['model']->searchUsers($id);
+    public function searchUsers(String $keyword){
+        return $this->user;
+    }
+    public function isVerified(String $id = null){
+        $data =  $id ?? $this->user;
+        $return = ['success' => false];
         if(!$data && $data->success){
             return false;
         }

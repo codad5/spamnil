@@ -8,7 +8,7 @@ function gethost($url){
     return $sepreated[2] ?? false;
 }
 function axios($url, $method, $data = null){
-    $curl = curl_init();
+$curl = curl_init();
 
 curl_setopt_array($curl, [
 	CURLOPT_URL => $url,
