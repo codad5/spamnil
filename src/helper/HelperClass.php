@@ -1,13 +1,14 @@
 <?php
 namespace Codad5\Spamnil\Helper;
-$dontenv = \Dotenv\Dotenv::createImmutable(__DIR__.'/../../');
-$dontenv->load();
-function gethost($url){
-    $sepreated = explode('/', $url);
-    return $sepreated[2] ?? false;
-}
-function fetch($url, $method, $data = null){
-        $curl = curl_init();
+
+class HelperClass
+{
+    public static function gethost($url){
+        $sepreated = explode('/', $url);
+        return $sepreated[2] ?? false;
+    }
+    public static function fetch($url, $method, $data = null){
+            $curl = curl_init();
 
         curl_setopt_array($curl, [
             CURLOPT_URL => $url,
@@ -19,7 +20,7 @@ function fetch($url, $method, $data = null){
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_HTTPHEADER => [
-                "X-RapidAPI-Host: ".gethost($_ENV[$data['host']]),
+                "X-RapidAPI-Host: ".self::gethost($_ENV[$data['host']]),
                 "X-RapidAPI-Key: ".$_ENV['RAPID_KEY']
             ],
         ]);
@@ -38,15 +39,5 @@ function fetch($url, $method, $data = null){
         }   
         
             return $response;
-
+    }
 }
-
-// class axios {
-//     public $method;
-//     public function __construct(){
-
-//     }
-//     public function get($url, $headers = []){
-        
-//     }
-// }

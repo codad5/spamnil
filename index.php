@@ -21,7 +21,7 @@ $router->get('/', function ($req, $res) {
 $router->get('/instagram', function ($req, $res) {
     $instagram = new InstagramView();
     $instagram->test('davido');
-    return $res->send(['is_verified'])->status(200);
+    return $res->send(['is_verified' => null])->status(200);
 });
 $router->get('/twitter', function ($req, $res) {
     return $res->render('index.php', $req);

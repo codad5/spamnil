@@ -1,8 +1,6 @@
 <?php
 namespace Codad5\Spamnil\Controller;
-require_once __DIR__.'/../../vendor/autoload.php';
-require_once __DIR__.'/../helper/helper.php';
-require_once __DIR__.'/../model/instagram.php';
+
 
 
 use \Codad5\Spamnil\Model\Instagram as InstagramModel;
@@ -10,15 +8,19 @@ use \Codad5\Spamnil\Model\Instagram as InstagramModel;
 $model = new InstagramModel();
 
 class Instagram{
-    // private $model = new InstagramModel();
+    private $model;
     private $searchuser;
     private $userinfo;
-    public function ___construct(String $user){
-        $this->searchuser = $GLOBALS['model']->searchUsers($user);
-        $this->userinfo = $GLOBALS['model']->getUserByusername($user);
+    public function __construct(String $user = null){
+        $this->model = new InstagramModel();
+        $this->searchuser = $user !== null ? $this->model->searchUsers($user) : null;
+        $this->userinfo = $user !== null ? $this->model->getUserByusername($user) : null;
     }
     public function searchUsers(String $keyword){
-        return $this->searchuser;
+        if($this->searchuser !== null){
+            return $this->searchuser;
+        }
+        return $this->model->searchUsers($keyword);
     }
     public function isVerified(String $id = null){
         $data =  $id ?? $this->searchuser;
@@ -35,10 +37,8 @@ class Instagram{
         return $return;
     }
 
-    public function no_of_followers(String $username = null){
-        if(!$username && $this->userinfo->success){
-            $username = $this->userinfo->data->data->edge_followed_by->count;
-        }
-        return $GLOBALS['model']->getUserByusername($username)->data->data->edge_followed_by->count;
+    public function no_of_followers(String $username = null): int{
+        $userinfo = $this->userinfo ?? $this->model->getUserByusername($username);
+        return $userinfo->data->data->edge_followed_by->count;
     }
 }
